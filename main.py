@@ -106,7 +106,7 @@ def show_data(df):
             st.write(right_search_tokens)
 
             # 형태소 분석 결과를 활용하여 검색하기
-            search_results_right = f[df['content'].str.contains(right_search_term, case=False)][['content','url','category']] #search_with_pos(df, right_search_tokens, 'content_pos')#d
+            search_results_right = df[df['content'].str.contains(right_search_term, case=False)][['content','url','category']] #search_with_pos(df, right_search_tokens, 'content_pos')#d
             st.write(f"### {right_search_term}에 대한 검색 결과")
             #st.write(search_results_right)
 
