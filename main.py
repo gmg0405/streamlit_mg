@@ -54,7 +54,7 @@ def load_data(uploaded_file):
 
 def show_data(df):
     st.write("### 데이터 미리보기")
-    st.write(df[['content','url','category']])
+    st.write(df[['content','url','category']].copy())
     length=len(df)
     st.write(f'전체 데이터 건수: {length}')
 
