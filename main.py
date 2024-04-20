@@ -28,17 +28,18 @@ def load_data(uploaded_file):
     kiwi = Kiwi()
     st.write("데이터의 형태소를 분석 중입니다...")
     with st.spinner("로딩 중..."):
-        try:
-            if uploaded_file.name.endswith('.xlsx'):
-                df = pd.read_excel(uploaded_file)
-                #df['content_pos'] = df['content'].apply(lambda x: kiwi.tokenize(x))
-            elif uploaded_file.name.endswith('.csv'):
-                df = pd.read_csv(uploaded_file)
-                #df['content_pos'] = df['content'].apply(lambda x: kiwi.tokenize(x))
-            return df
-        except Exception as e:
-            st.error(f"파일을 로드하는 중 오류가 발생했습니다: {e}")
-            return None
+        df=pd.read_csv('jinkyeong_sentence.csv')
+        # try:
+        #     if uploaded_file.name.endswith('.xlsx'):
+        #         df = pd.read_excel(uploaded_file)
+        #         #df['content_pos'] = df['content'].apply(lambda x: kiwi.tokenize(x))
+        #     elif uploaded_file.name.endswith('.csv'):
+        #         df = pd.read_csv(uploaded_file)
+        #         #df['content_pos'] = df['content'].apply(lambda x: kiwi.tokenize(x))
+        #     return df
+        # except Exception as e:
+        #     st.error(f"파일을 로드하는 중 오류가 발생했습니다: {e}")
+        #     return None
         st.success("로딩 완료!")  # 작업 완료 후 메시지 표시
 
 # def preprocess_data(df):
