@@ -41,6 +41,7 @@ def load_data(uploaded_file):
         #     st.error(f"파일을 로드하는 중 오류가 발생했습니다: {e}")
         #     return None
         st.success("로딩 완료!")  # 작업 완료 후 메시지 표시
+    return df
 
 # def preprocess_data(df):
 #     # 형태소 분석기 초기화
