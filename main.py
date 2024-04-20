@@ -28,7 +28,7 @@ def load_data(uploaded_file):
     kiwi = Kiwi()
     st.write("데이터의 형태소를 분석 중입니다...")
     with st.spinner("로딩 중..."):
-        df=pd.read_csv('jinkyeong_sentence.csv')
+        df=pd.read_csv('jinkyeong_sentence.csv',encoding='utf-8')
         # try:
         #     if uploaded_file.name.endswith('.xlsx'):
         #         df = pd.read_excel(uploaded_file)
