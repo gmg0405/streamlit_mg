@@ -16,7 +16,7 @@ def main():
     st.title("어휘 연어 관계 분석(콘코던스)")
 
     # 파일 업로드
-    uploaded_file = st.file_uploader("Excel 파일 업로드", type=["xlsx","csv"])
+    uploaded_file = 1#st.file_uploader("Excel 파일 업로드", type=["xlsx","csv"])
 
     if uploaded_file is not None:
         df = load_data(uploaded_file)
