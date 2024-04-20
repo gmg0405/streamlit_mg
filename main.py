@@ -19,12 +19,12 @@ def main():
     uploaded_file = 1#st.file_uploader("Excel 파일 업로드", type=["xlsx","csv"])
 
     if uploaded_file is not None:
-        df = load_data(uploaded_file)
+        df = load_data()
         # if df is not None:
         #     df = preprocess_data(df)
         show_data(df)
 
-def load_data(uploaded_file):
+def load_data():
     kiwi = Kiwi()
     st.write("데이터의 형태소를 분석 중입니다...")
     with st.spinner("로딩 중..."):
