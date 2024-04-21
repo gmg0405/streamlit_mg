@@ -72,53 +72,77 @@ def show_data(df):
         #right_search_term_pos = st.text_input("오른쪽 품사 입력 (명사, 동사 등):")
         right_search_term = st.text_input("오른쪽 검색어 입력:")
 
+# 카테고리 필터
+    category_filter_left = st.multiselect("왼쪽 카테고리 필터:", df['category'].unique())
+    category_filter_right = st.multiselect("오른쪽 카테고리 필터:", df['category'].unique())
+
     # 화면 분할
     col1, col2 = st.columns(2)
 
     # 왼쪽 열에 검색 결과 표시
     with col1:
         if left_search_term:
-            # 형태소 분석기 초기화
-        
-            kiwi = Kiwi(model_type='sbg')
-            #kiwi.prepare()
-
-            
-
-            # 검색어 형태소 분석
-            left_search_tokens = tokenize(left_search_term, kiwi)
-            st.write(left_search_tokens)
-
-            # 형태소 분석 결과를 활용하여 검색하기
-            search_results_left = df[df['content'].str.contains(left_search_term, case=False)][['content','url','category']]#search_with_pos(df, left_search_term, left_search_term_pos)#
-            st.write("검색 건 수:",len(search_results_left))
+            search_results_left = df[df['content'].str.contains(left_search_term, case=False) & df['category'].isin(category_filter_left)][['content','url','category']]
+            st.write("검색 건 수:", len(search_results_left))
             st.write(f"### {left_search_term}에 대한 검색 결과")
-            #st.write(search_results_left)
-
-            #검색 결과 표에 하이라이트 적용
             search_results_html_left = highlight_search_results(search_results_left, left_search_term)
             st.write(search_results_html_left, unsafe_allow_html=True)
 
     # 오른쪽 열에 검색 결과 표시
     with col2:
         if right_search_term:
-            # 형태소 분석기 초기화
-            kiwi = Kiwi(model_type='sbg')
-            #kiwi.prepare()
-
-            # 검색어 형태소 분석
-            right_search_tokens = tokenize(right_search_term, kiwi)
-            st.write(right_search_tokens)
-
-            # 형태소 분석 결과를 활용하여 검색하기
-            search_results_right = df[df['content'].str.contains(right_search_term, case=False)][['content','url','category']] #search_with_pos(df, right_search_tokens, 'content_pos')#d
-            st.write("검색 건 수:",len(right_search_term))
+            search_results_right = df[df['content'].str.contains(right_search_term, case=False) & df['category'].isin(category_filter_right)][['content','url','category']]
+            st.write("검색 건 수:", len(search_results_right))
             st.write(f"### {right_search_term}에 대한 검색 결과")
-            #st.write(search_results_right)
-
-            #검색 결과 표에 하이라이트 적용
             search_results_html_right = highlight_search_results(search_results_right, right_search_term)
-            st.write(search_results_html_right, unsafe_allow_html=True)
+            st.write(search_results_html_right, unsafe_allow_html=True)    
+# # 화면 분할
+    # col1, col2 = st.columns(2)
+
+    # # 왼쪽 열에 검색 결과 표시
+    # with col1:
+    #     if left_search_term:
+    #         # 형태소 분석기 초기화
+        
+    #         kiwi = Kiwi(model_type='sbg')
+    #         #kiwi.prepare()
+
+            
+
+    #         # 검색어 형태소 분석
+    #         left_search_tokens = tokenize(left_search_term, kiwi)
+    #         st.write(left_search_tokens)
+
+    #         # 형태소 분석 결과를 활용하여 검색하기
+    #         search_results_left = df[df['content'].str.contains(left_search_term, case=False)][['content','url','category']]#search_with_pos(df, left_search_term, left_search_term_pos)#
+    #         st.write("검색 건 수:",len(search_results_left))
+    #         st.write(f"### {left_search_term}에 대한 검색 결과")
+    #         #st.write(search_results_left)
+
+    #         #검색 결과 표에 하이라이트 적용
+    #         search_results_html_left = highlight_search_results(search_results_left, left_search_term)
+    #         st.write(search_results_html_left, unsafe_allow_html=True)
+
+    # # 오른쪽 열에 검색 결과 표시
+    # with col2:
+    #     if right_search_term:
+    #         # 형태소 분석기 초기화
+    #         kiwi = Kiwi(model_type='sbg')
+    #         #kiwi.prepare()
+
+    #         # 검색어 형태소 분석
+    #         right_search_tokens = tokenize(right_search_term, kiwi)
+    #         st.write(right_search_tokens)
+
+    #         # 형태소 분석 결과를 활용하여 검색하기
+    #         search_results_right = df[df['content'].str.contains(right_search_term, case=False)][['content','url','category']] #search_with_pos(df, right_search_tokens, 'content_pos')#d
+    #         st.write("검색 건 수:",len(right_search_term))
+    #         st.write(f"### {right_search_term}에 대한 검색 결과")
+    #         #st.write(search_results_right)
+
+    #         #검색 결과 표에 하이라이트 적용
+    #         search_results_html_right = highlight_search_results(search_results_right, right_search_term)
+    #         st.write(search_results_html_right, unsafe_allow_html=True)
 
 def tokenize(text, kiwi):
     tokens = kiwi.analyze(text)
