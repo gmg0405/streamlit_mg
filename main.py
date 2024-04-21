@@ -73,8 +73,14 @@ def show_data(df):
         right_search_term = st.text_input("오른쪽 검색어 입력:")
 
 # 카테고리 필터
-    category_filter_left = st.multiselect("왼쪽 카테고리 필터:", df['category'].unique())
-    category_filter_right = st.multiselect("오른쪽 카테고리 필터:", df['category'].unique())
+    
+    category_filter_col1,category_filter_col2=st.columns(2)
+    with category_filter_col1:
+        
+        category_filter_left = st.multiselect("왼쪽 카테고리 필터:", df['category'].unique())
+
+    with category_filter_col2:
+        category_filter_right = st.multiselect("오른쪽 카테고리 필터:", df['category'].unique())
 
     # 화면 분할
     col1, col2 = st.columns(2)
