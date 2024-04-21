@@ -16,7 +16,7 @@ def main():
     st.title("어휘 연어 관계 분석(콘코던스)")
 
     # 파일 업로드
-    uploaded_file =1 #st.file_uploader("Excel 파일 업로드", type=["xlsx","csv"])
+    uploaded_file =st.file_uploader("Excel 파일 업로드", type=["xlsx","csv"])
 
     if uploaded_file is not None:
         df = load_data(uploaded_file)
@@ -29,17 +29,17 @@ def load_data(uploaded_file):
     st.write("데이터의 형태소를 분석 중입니다...")
     with st.spinner("로딩 중..."):
         df=pd.read_csv('jinkyeong_sentence.csv',encoding='utf-8')
-        # try:
-        #     if uploaded_file.name.endswith('.xlsx'):
-        #         df = pd.read_excel(uploaded_file)
-        #         #df['content_pos'] = df['content'].apply(lambda x: kiwi.tokenize(x))
-        #     elif uploaded_file.name.endswith('.csv'):
-        #         df = pd.read_csv(uploaded_file)
-        #         #df['content_pos'] = df['content'].apply(lambda x: kiwi.tokenize(x))
-        #     return df
-        # except Exception as e:
-        #     st.error(f"파일을 로드하는 중 오류가 발생했습니다: {e}")
-        #     return None
+        try:
+            if uploaded_file.name.endswith('.xlsx'):
+                df = pd.read_excel(uploaded_file)
+                #df['content_pos'] = df['content'].apply(lambda x: kiwi.tokenize(x))
+            elif uploaded_file.name.endswith('.csv'):
+                df = pd.read_csv(uploaded_file)
+                #df['content_pos'] = df['content'].apply(lambda x: kiwi.tokenize(x))
+            return df
+        except Exception as e:
+            st.error(f"파일을 로드하는 중 오류가 발생했습니다: {e}")
+            return None
         st.success("로딩 완료!")  # 작업 완료 후 메시지 표시
     return df
 
