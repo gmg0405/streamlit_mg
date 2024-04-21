@@ -22,7 +22,7 @@ def main():
         df = load_data(uploaded_file)
         # if df is not None:
         #     df = preprocess_data(df)
-        show_data(df)
+        #show_data(df)
 
 def load_data(uploaded_file):
     kiwi = Kiwi()
