@@ -76,11 +76,16 @@ def show_data(df):
     
     category_filter_col1,category_filter_col2=st.columns(2)
     with category_filter_col1:
-        
         category_filter_left = st.multiselect("왼쪽 카테고리 필터:", df['category'].unique())
+        if not category_filter_left:
+            category_filter_left = df['category'].unique()
+        
 
     with category_filter_col2:
         category_filter_right = st.multiselect("오른쪽 카테고리 필터:", df['category'].unique())
+        if not category_filter_right:
+             category_filter_right = df['category'].unique()
+        
 
     # 화면 분할
     col1, col2 = st.columns(2)
