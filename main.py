@@ -60,17 +60,23 @@ def show_data(df):
     st.write(f'전체 데이터 건수: {length}')
 
 
-    search_col1, search_col2 = st.columns(2)
+    search_col1,search_col_bt, search_col2, search_col2_bt = st.columns(4)
 
     with search_col1:
         # 왼쪽 검색 기능
         #left_search_term_pos = st.text_input("왼쪽 품사 입력 (명사, 동사 등):")
         left_search_term = st.text_input("왼쪽 검색어 입력:")
+
+    with search_col_bt:
+        search_button_left = st.button("왼쪽 검색하기")
     
     with search_col2:
         # 오른쪽 검색 기능
         #right_search_term_pos = st.text_input("오른쪽 품사 입력 (명사, 동사 등):")
         right_search_term = st.text_input("오른쪽 검색어 입력:")
+
+    with search_col2_bt:
+        search_button_right = st.button("오른쪽 검색하기")
 
 # 카테고리 필터
     
