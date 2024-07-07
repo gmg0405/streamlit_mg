@@ -8,7 +8,7 @@ import re
 
 import streamlit as st
 import pandas as pd
-from kiwipiepy import Kiwi
+#from kiwipiepy import Kiwi
 
 def main():
     st.set_page_config(layout="wide")  # Wide 모드로 설정
@@ -25,7 +25,7 @@ def main():
         show_data(df)
 
 def load_data(uploaded_file):
-    kiwi = Kiwi()
+    #kiwi = Kiwi()
     st.write("데이터의 형태소를 분석 중입니다...")
     with st.spinner("로딩 중..."):
         df=pd.read_csv('jinkyeong_sentence.csv',encoding='utf-8')
